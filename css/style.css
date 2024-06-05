@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 1200px;
+    margin: 50px auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#calendar {
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    #calendar {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .fc .fc-toolbar {
+        flex-wrap: wrap;
+    }
+
+    .fc .fc-dayGridMonth-view {
+        table-layout: auto;
+    }
+
+    .fc .fc-dayGridMonth-view .fc-day-grid {
+        display: block;
+    }
+
+    .fc .fc-dayGridMonth-view .fc-day-grid .fc-row {
+        display: block;
+        width: 100%;
+    }
+
+    .fc .fc-dayGridMonth-view .fc-day-grid .fc-row .fc-content-skeleton {
+        display: block;
+        width: 100%;
+    }
+
+    .fc .fc-dayGridMonth-view .fc-day-grid .fc-row .fc-content-skeleton table {
+        width: 100%;
+    }
+}
