@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/schedule.css">
+    <link rel="stylesheet" href="reset.css">
     <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css' rel='stylesheet' />
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <title>Agendamento</title>
 </head>
+
 <body>
     <div class="container">
         <h1>Agendamento</h1>
         <div id="calendar"></div>
-        <button class="btn btn-primary mt-3" data-toggle="modal" data-target="#bookingModal">Nova Reserva</button>
+        <button class="btn btn-info mt-3" data-toggle="modal" data-target="#bookingModal">Nova Reserva</button>
     </div>
 
     <!-- Modal para Nova Reserva -->
@@ -43,7 +46,7 @@
                             <label for="reason">Motivo:</label>
                             <textarea id="reason" name="reason" class="form-control" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Reservar</button>
+                        <button type="submit" class="btn btn-info">Reservar</button>
                     </form>
                 </div>
             </div>
@@ -51,7 +54,8 @@
     </div>
 
     <!-- Modal para Visualizar Reserva -->
-    <div class="modal fade" id="viewBookingModal" tabindex="-1" aria-labelledby="viewBookingModalLabel" aria-hidden="true">
+    <div class="modal fade" id="viewBookingModal" tabindex="-1" aria-labelledby="viewBookingModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -66,13 +70,16 @@
                     <p><strong>Hora Final:</strong> <span id="viewEndTime"></span></p>
                     <p><strong>Motivo:</strong> <span id="viewReason"></span></p>
                     <p><strong>Reservado por:</strong> <span id="viewReservedBy"></span></p>
+                    <button type="button" class="btn btn-primary" id="editBookingButton">Editar</button>
+                    <button type="button" class="btn btn-danger" id="deleteBookingButton">Excluir</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Modal para Visualizar Reservas do Dia -->
-    <div class="modal fade" id="dayBookingsModal" tabindex="-1" aria-labelledby="dayBookingsModalLabel" aria-hidden="true">
+    <div class="modal fade" id="dayBookingsModal" tabindex="-1" aria-labelledby="dayBookingsModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -88,13 +95,69 @@
         </div>
     </div>
 
+    <!-- Modal for Editing a Booking -->
+    <div class="modal fade" id="editBookingModal" tabindex="-1" aria-labelledby="editBookingModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editBookingModalLabel">Editar Reserva</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editBookingForm">
+                        <div class="form-group">
+                            <label for="editDate">Data:</label>
+                            <input type="date" id="editDate" name="editDate" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editStartTime">Hora de Início:</label>
+                            <input type="time" id="editStartTime" name="editStartTime" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editEndTime">Hora Final:</label>
+                            <input type="time" id="editEndTime" name="editEndTime" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editReason">Motivo:</label>
+                            <input type="text" id="editReason" name="editReason" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Confirming Deletion -->
+    <div class="modal fade" id="deleteBookingModal" tabindex="-1" aria-labelledby="deleteBookingModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteBookingModalLabel">Confirmar Exclusão</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Tem certeza que deseja excluir esta reserva?</p>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteButton">Excluir</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/index.global.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/lang/pt-br.js'></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             // Verificação de autenticação
             const currentUser = localStorage.getItem('currentUser');
             if (!currentUser) {
@@ -105,4 +168,5 @@
     </script>
     <script src="js/script.js"></script>
 </body>
+
 </html>

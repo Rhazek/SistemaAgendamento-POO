@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@300;400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Poppins";
     background-image: url(/css/images/fundo1.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -81,6 +81,37 @@ a:hover {
     padding: 10px;
     margin-top: 10px;
     background-color: #fff;
+}
+
+/* Alterar a cor da fonte do calendário */
+.fc-theme-standard .fc-scrollgrid, .fc-theme-standard .fc-scrollgrid td, .fc-theme-standard .fc-scrollgrid th {
+    color: #ffffff; /* Cor da fonte do calendário */
+}
+
+/* Alterar a cor dos textos do calendário (eventos, dias, etc) */
+.fc .fc-daygrid-event, .fc .fc-daygrid-event-dot, .fc .fc-daygrid-day-number, .fc .fc-list-event {
+    color: #ffffff; /* Cor da fonte */
+}
+
+/* Alterar a cor dos cabeçalhos dos dias da semana */
+.fc .fc-col-header-cell-cushion {
+    color: #ffffff; /* Cor da fonte dos dias da semana */
+}
+
+/* Alterar o fundo dos botões do calendário */
+.fc .fc-button {
+    background-color: #007bff; /* Fundo dos botões */
+    color: #ffffff; /* Cor da fonte dos botões */
+    border: none; /* Remover borda */
+}
+
+.fc .fc-button:hover {
+    background-color: #0056b3; /* Fundo dos botões ao passar o mouse */
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active, .fc .fc-button-primary:not(:disabled):active {
+    background-color: #0056b3; /* Fundo dos botões ao serem clicados */
+    border-color: #0056b3; /* Cor da borda ao serem clicados */
 }
 
 @media (max-width: 768px) {
